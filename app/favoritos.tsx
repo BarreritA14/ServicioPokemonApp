@@ -48,18 +48,19 @@ export default function FavoritosScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#070b14',
   },
   centered: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+    backgroundColor: '#070b14',
   },
   emptyText: {
     fontSize: 18,
     textAlign: 'center',
-    color: '#555',
+    color: '#cbd5e1',
   },
   listContent: {
     paddingHorizontal: 16,
@@ -70,7 +71,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderColor: '#eee',
+    borderColor: 'rgba(148,163,184,0.2)',
+    backgroundColor: '#0f172a',
+    paddingHorizontal: 12,
+    marginTop: 10,
+    borderRadius: 16,
   },
   starButton: {
     paddingRight: 10,
@@ -85,5 +90,6 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 18,
     textTransform: 'capitalize',
+    color: '#f8fafc',
   },
 });

@@ -8,11 +8,13 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <FavoritesProvider>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
         <Stack
           screenOptions={{
-            headerStyle: { backgroundColor: '#f5f5f5' },
-            headerTitleStyle: { fontWeight: '700' },
+            headerStyle: { backgroundColor: '#0b1020' },
+            headerTintColor: '#f8fafc',
+            headerTitleStyle: { fontWeight: '700', color: '#f8fafc' },
+            contentStyle: { backgroundColor: '#0b1020' },
           }}
         />
       </FavoritesProvider>
