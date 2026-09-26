@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "pokedex-lite",
-    "slug": "pokedex-lite",
+    "name": "PokeApi",
+    "slug": "pokeapi",
     "scheme": "pokedexlite",
     "version": "1.0.0",
     "orientation": "portrait",

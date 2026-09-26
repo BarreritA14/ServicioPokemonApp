@@ -4,6 +4,7 @@ import {
   Animated,
   Dimensions,
   Image,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -13,6 +14,7 @@ import {
 import { useFavorites } from '../context/FavoritesContext';
 import { usePokemonDetail } from '../hooks/usePokemonDetail';
 import { getPokemonRarity } from '../utils/pokemonRarity';
+import { PokemonHabitatBackground } from './PokemonHabitatBackground';
 import { PokemonRarityBadge } from './PokemonRarityBadge';
 import { PokemonTypeBadge } from './PokemonTypeBadge';
 
@@ -53,7 +55,7 @@ function getThemeForTypes(types: string[]) {
 export function PokemonCard({ name }: PokemonCardProps) {
   const { pokemon } = usePokemonDetail(name);
   const { isFavorite, toggleFavorite } = useFavorites();
-  const rarity = pokemon ? getPokemonRarity(pokemon.id) : 'NORMAL';
+  const rarity = pokemon ? getPokemonRarity(pokemon.id, pokemon.name) : 'NORMAL';
   const colors = pokemon ? getThemeForTypes(pokemon.types.map((item) => item.type.name)) : TYPE_COLORS.normal;
   const scaleAnim = React.useRef(new Animated.Value(1)).current;
 
@@ -62,7 +64,7 @@ export function PokemonCard({ name }: PokemonCardProps) {
       toValue: 0.97,
       friction: 7,
       tension: 120,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== 'web',
     }).start();
   };
 
@@ -71,7 +73,7 @@ export function PokemonCard({ name }: PokemonCardProps) {
       toValue: 1,
       friction: 7,
       tension: 120,
-      useNativeDriver: true,
+      useNativeDriver: Platform.OS !== 'web',
     }).start();
   };
 
@@ -86,13 +88,18 @@ export function PokemonCard({ name }: PokemonCardProps) {
               styles.card,
               {
                 width: cardWidth,
-                backgroundColor: '#111827',
+                backgroundColor: '#0f172a',
                 shadowColor: colors.glow,
               },
             ]}
           >
-            <View style={[styles.glow, { backgroundColor: colors.start, opacity: 0.75 }]} />
-            <View style={[styles.highlight, { backgroundColor: colors.end, opacity: 0.45 }]} />
+            <PokemonHabitatBackground
+              name={pokemon?.name ?? name}
+              primaryType={pokemon?.types?.[0]?.type?.name ?? 'normal'}
+              accent={colors.start}
+            />
+            <View style={[styles.glow, { backgroundColor: colors.start, opacity: 0.35 }]} />
+            <View style={[styles.highlight, { backgroundColor: colors.end, opacity: 0.52 }]} />
 
             <View style={styles.headerRow}>
               <Text style={styles.number}>#{pokemon ? String(pokemon.id).padStart(3, '0') : '...'}</Text>
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: 24,
-    minHeight: 260,
+    minHeight: 270,
     padding: 16,
     overflow: 'hidden',
     borderWidth: 1,
@@ -206,12 +213,12 @@ const styles = StyleSheet.create({
     zIndex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: 8,
-    height: 118,
+    marginVertical: 10,
+    height: 136,
   },
   image: {
-    width: 110,
-    height: 110,
+    width: 128,
+    height: 128,
   },
   placeholder: {
     width: 110,

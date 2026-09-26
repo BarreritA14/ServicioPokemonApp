@@ -12,10 +12,13 @@ import {
 import { PokemonCard } from '../src/components/PokemonCard';
 import { useFavorites } from '../src/context/FavoritesContext';
 import { usePokemonList } from '../src/hooks/usePokemonList';
+import { CURATED_POKEMON_NAMES } from '../src/utils/pokemonSelection';
 
 export default function HomeScreen() {
-  const { pokemons, loading, error } = usePokemonList(20);
+  const { loading, error } = usePokemonList(CURATED_POKEMON_NAMES.length);
   const { favorites } = useFavorites();
+
+  const displayedPokemons = CURATED_POKEMON_NAMES;
 
   if (loading) {
     return (
@@ -38,7 +41,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <View style={styles.headerWrap}>
         <View>
-          <Text style={styles.title}>Pokédex</Text>
+          <Text style={styles.title}>PokeApi</Text>
           <Text style={styles.subtitle}>Explore the Pokémon world</Text>
         </View>
 
@@ -50,7 +53,7 @@ export default function HomeScreen() {
       </View>
 
       <FlatList
-        data={pokemons}
+        data={displayedPokemons}
         keyExtractor={(item) => item}
         numColumns={2}
         columnWrapperStyle={styles.columnWrapper}

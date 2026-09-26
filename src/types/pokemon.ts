@@ -25,6 +25,13 @@ export interface PokemonStat {
   };
 }
 
+export interface PokemonAbility {
+  ability: {
+    name: string;
+  };
+  is_hidden: boolean;
+}
+
 export interface PokemonDetail {
   id: number;
   name: string;
@@ -32,7 +39,13 @@ export interface PokemonDetail {
   weight: number;
   sprites: {
     front_default: string | null;
+    other?: {
+      'official-artwork'?: {
+        front_default: string | null;
+      };
+    };
   };
   types: PokemonType[];
   stats: PokemonStat[];
+  abilities: PokemonAbility[];
 }
